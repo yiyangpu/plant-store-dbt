@@ -1,5 +1,5 @@
 SELECT
-    _FIVETRAN_ID,
+    _fivetran_id,
     SESSION_ID,
     ITEM_NAME,
     ITEM_VIEW_AT AS ITEM_VIEW_TIME,
