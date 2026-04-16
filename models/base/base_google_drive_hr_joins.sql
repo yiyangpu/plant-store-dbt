@@ -1,11 +1,9 @@
-SELECT
-    EMPLOYEE_ID,
-    NAME,
-    TITLE,
-    CITY,
-    ADDRESS,
-    ANNUAL_SALARY,
-
-    TO_DATE(HIRE_DATE) AS hire_date
-
-FROM {{ source('google_drive', 'hr_joins') }}
+select
+    employee_id,
+    name,
+    title,
+    city,
+    address,
+    annual_salary,
+    try_to_date(trim(replace(hire_date, 'day ', ''))) as hire_date
+from {{ source('google_drive', 'hr_joins') }}
