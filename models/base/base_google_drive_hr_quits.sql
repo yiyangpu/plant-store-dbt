@@ -3,6 +3,6 @@ SELECT
     _LINE,
     _MODIFIED,
     _FIVETRAN_SYNCED,
-    EMPLOYEE_ID,
+    CAST(EMPLOYEE_ID AS STRING) AS EMPLOYEE_ID,
     QUIT_DATE
 FROM {{ source('google_drive', 'hr_quits') }}
