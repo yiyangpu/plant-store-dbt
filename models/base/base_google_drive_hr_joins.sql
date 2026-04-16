@@ -1,4 +1,8 @@
 select
+    _FILE,
+    _LINE,
+    _MODIFIED,
+    _FIVETRAN_SYNCED,
     employee_id,
     name,
     title,
