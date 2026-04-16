@@ -1,13 +1,13 @@
-select
+SELECT
     _FILE,
     _LINE,
     _MODIFIED,
     _FIVETRAN_SYNCED,
-    employee_id,
-    name,
-    title,
-    city,
-    address,
-    annual_salary,
-    try_to_date(trim(replace(hire_date, 'day ', ''))) as hire_date
-from {{ source('google_drive', 'hr_joins') }}
+    CAST(EMPLOYEE_ID AS STRING) AS EMPLOYEE_ID,
+    NAME,
+    TITLE,
+    CITY,
+    ADDRESS,
+    ANNUAL_SALARY,
+    TRY_TO_DATE(TRIM(REPLACE(HIRE_DATE, 'day ', ''))) as HIRE_DATE
+FROM {{ source('google_drive', 'hr_joins') }}
