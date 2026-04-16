@@ -2,9 +2,12 @@ SELECT
     ORDER_ID,
     SESSION_ID,
     CLIENT_NAME,
+    PAYMENT_INFO,
     PAYMENT_METHOD,
+    PHONE,
     SHIPPING_ADDRESS,
-
-    TO_TIMESTAMP(ORDER_AT) AS order_at
-
+    SHIPPING_COST,
+    STATE,
+    TAX_RATE,
+    TRY_TO_TIMESTAMP(ORDER_AT) AS ORDER_AT
 FROM {{ source('web', 'orders') }}
