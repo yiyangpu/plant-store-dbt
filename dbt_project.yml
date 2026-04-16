@@ -35,7 +35,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  pet_lovers_analytics:
+  Team5_Project:
     base:
       +materialized: view
       +schema: BASE
