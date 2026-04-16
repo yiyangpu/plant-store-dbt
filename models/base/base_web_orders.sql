@@ -9,5 +9,5 @@ SELECT
     SHIPPING_COST,
     STATE,
     TAX_RATE,
-    TRY_TO_TIMESTAMP(ORDER_AT) AS ORDER_AT
+    ORDER_AT
 FROM {{ source('web', 'orders') }}
