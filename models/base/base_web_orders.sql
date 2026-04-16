@@ -9,5 +9,5 @@ SELECT
     SHIPPING_COST,
     STATE,
     TAX_RATE,
-    ORDER_AT
+    ORDER_AT AS ORDER_TIME
 FROM {{ source('web', 'orders') }}
