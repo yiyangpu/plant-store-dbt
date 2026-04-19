@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: int_session
+    description: "Session-level aggregated table for funnel analysis, combining session, page view, item view, and order data."
+
+    columns:
+      - name: session_id
+        description: "Unique identifier for each session"
+        tests:
+          - not_null
+          - unique
+
+      - name: client_id
+        description: "Unique identifier for each client"
+        tests:
+          - not_null
+
+      - name: session_time
+        description: "Timestamp when the session started"
+
+      - name: has_page_view
+        description: "Indicates whether the session includes at least one page view"
+
+      - name: has_item_view
+        description: "Indicates whether the session includes at least one item view"
+
+      - name: has_add_to_cart
+        description: "Indicates whether any item was added to cart during the session"
+
+      - name: has_order
+        description: "Indicates whether an order was placed during the session"
+
+      - name: total_page_views
+        description: "Total number of pages viewed during the session"
+
+      - name: total_items_viewed
+        description: "Total number of items viewed during the session"
+
+      - name: total_add_to_cart_quantity
+        description: "Total quantity of items added to cart during the session"
+
+      - name: total_remove_from_cart_quantity
+        description: "Total quantity of items removed from cart during the session"
+
+      - name: order_count
+        description: "Total number of orders placed during the session"
+
+
