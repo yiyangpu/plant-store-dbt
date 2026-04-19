@@ -59,6 +59,7 @@ final AS (
     SELECT
         s.session_id,
         s.client_id,
+        s.device_os,
         s.session_time,
         COALESCE(p.has_page_view, FALSE) AS has_page_view,
         COALESCE(i.has_item_view, FALSE) AS has_item_view,
