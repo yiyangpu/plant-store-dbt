@@ -15,7 +15,8 @@ page_views AS (
     SELECT
         session_id,
         COUNT(*) AS total_page_views,
-        TRUE AS has_page_view
+        TRUE AS has_page_view,
+        MAX(CASE WHEN LOWER(TRIM(page_name)) = 'shop_plants' THEN TRUE ELSE FALSE END) AS has_shop_page
     FROM {{ ref('base_web_page_views') }}
     GROUP BY session_id
 ),
@@ -61,6 +62,7 @@ final AS (
         s.session_time,
         COALESCE(p.has_page_view, FALSE) AS has_page_view,
         COALESCE(i.has_item_view, FALSE) AS has_item_view,
+        COALESCE(p.has_shop_page, FALSE) AS has_shop_page,
         COALESCE(i.has_add_to_cart, FALSE) AS has_add_to_cart,
         COALESCE(o.has_order, FALSE) AS has_order,
         COALESCE(p.total_page_views, 0) AS total_page_views,
