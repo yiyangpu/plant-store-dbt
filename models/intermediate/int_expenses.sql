@@ -8,7 +8,10 @@ WITH cleaned_expenses AS (
 
 SELECT
     expense_date,
-    expense_type,
-    SUM(EXPENSE_AMOUNT) AS total_expense
+    SUM(CASE WHEN expense_type = 'hr' THEN expense_amount ELSE 0 END) AS hr_cost,
+    SUM(CASE WHEN expense_type = 'warehouse' THEN expense_amount ELSE 0 END) AS warehouse_cost,
+    SUM(CASE WHEN expense_type = 'tech tool' THEN expense_amount ELSE 0 END) AS tech_tool_cost,
+    SUM(CASE WHEN expense_type = 'other' THEN expense_amount ELSE 0 END) AS other_cost,
+    SUM(expense_amount) AS total_expense
 FROM cleaned_expenses
-GROUP BY 1,2
+GROUP BY expense_date
