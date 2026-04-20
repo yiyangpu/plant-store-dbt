@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fact_session
+    description: "One row per website session, summarizing session-level activity for funnel analysis, including page views, shopping page visits, item views, add-to-cart behavior, and orders."
+
+    columns:
+      - name: session_id
+        description: "Unique identifier for each website session."
+        tests:
+          - unique
+          - not_null
+
+      - name: client_id
+        description: "Identifier of the client associated with the session."
+        tests:
+            - not_null
+            
+      - name: device_os
+        description: "Operating system used in the session, such as ios, android, mac, or windows."
+
+      - name: session_time
+        description: "Timestamp when the session started."
+
+      - name: has_page_view
+        description: "Boolean flag indicating whether the session had at least one page view."
+
+      - name: has_item_view
+        description: "Boolean flag indicating whether the session viewed at least one item."
+
+      - name: has_shop_page
+        description: "Boolean flag indicating whether the session viewed the shop_plants page."
+
+      - name: has_add_to_cart
+        description: "Boolean flag indicating whether at least one item was added to cart during the session."
+
+      - name: has_order
+        description: "Boolean flag indicating whether the session resulted in at least one order."
+
+      - name: total_page_views
+        description: "Total number of page views recorded in the session."
+
+      - name: total_items_viewed
+        description: "Total number of item-view events recorded in the session."
+
+      - name: total_add_to_cart_quantity
+        description: "Total quantity of items added to cart during the session."
+
+      - name: total_remove_from_cart_quantity
+        description: "Total quantity of items removed from cart during the session."
+
+      - name: order_count
+        description: "Total number of orders associated with the session."
