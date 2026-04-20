@@ -1,19 +1,14 @@
 with orders as (
-
     select *
     from {{ ref('base_web_orders') }}
-
 ),
 
 returns as (
-
     select *
     from {{ ref('base_google_drive_returns') }}
-
 ),
 
 dedup_orders as (
-
     select *
     from (
         select *,
@@ -24,26 +19,21 @@ dedup_orders as (
         from orders
     )
     where rn = 1
-
 ),
 
 joined as (
-
     select
         o.order_id,
         o.order_time,
         o.price_per_unit,
         o.add_to_cart_quantity,
         r.is_refunded
-
     from dedup_orders o
     left join returns r
         on o.order_id = r.order_id
-
 ),
 
 final as (
-
     select
         order_id,
         order_time,
@@ -53,9 +43,7 @@ final as (
             when is_refunded = true then 0
             else price_per_unit * add_to_cart_quantity
         end as revenue
-
     from joined
-
 )
 
 select * from final
