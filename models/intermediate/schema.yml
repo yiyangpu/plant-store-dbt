@@ -47,3 +47,59 @@ models:
         description: "Total number of orders placed during the session"
 
 
+  - name: int_employee
+    description: "Employee-level intermediate table built by combining hr_joins and hr_quits."
+
+    columns:
+      - name: employee_id
+        description: "Unique identifier for each employee"
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: "Employee name"
+
+      - name: title
+        description: "Employee job title"
+
+      - name: city
+        description: "City where the employee is located"
+
+      - name: address
+        description: "Employee address"
+
+      - name: annual_salary
+        description: "Employee annual salary"
+
+      - name: hire_date
+        description: "Date when the employee was hired"
+
+      - name: quit_date
+        description: "Date when the employee left the company, if applicable"
+
+      - name: employee_status
+        description: "Current employee status (active or quit)"
+
+      - name: is_quit
+        description: "Boolean flag indicating whether the employee has quit"
+
+
+  - name: int_orders
+    description: "Order-level intermediate table built by deduplicating orders and combining them with return information."
+
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order"
+        tests:
+          - not_null
+          - unique
+
+      - name: order_time
+        description: "Timestamp when the order was placed"
+
+      - name: is_refunded
+        description: "Original refund flag from returns table"
+
+      - name: is_refunded_bool
+        description: "Cleaned boolean flag indicating whether the order was refunded"
