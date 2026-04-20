@@ -1,19 +1,14 @@
 with hr_joins as (
-
     select * 
     from {{ ref('base_google_drive_hr_joins') }}
-
 ),
 
 hr_quits as (
-
     select * 
     from {{ ref('base_google_drive_hr_quits') }}
-
 ),
 
 final as (
-
     select
         j.employee_id,
         j.name,
@@ -22,7 +17,6 @@ final as (
         j.address,
         j.annual_salary,
         j.hire_date,
-
         q.quit_date,
 
         case 
@@ -38,7 +32,6 @@ final as (
     from hr_joins j
     left join hr_quits q
         on j.employee_id = q.employee_id
-
 )
 
 select * from final
