@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fact_session
-    description: "One row per website session, summarizing session-level activity for funnel analysis, including page views, shopping page visits, item views, add-to-cart behavior, and orders."
+    description: "One row per session, summarizing its events on the website."
 
     columns:
       - name: session_id
@@ -51,3 +51,91 @@ models:
 
       - name: order_count
         description: "Total number of orders associated with the session."
+  
+
+  - name: dim_item
+    description: "One row per item sold on the website, summarizing item-level engagement and cart activity."
+
+    columns:
+      - name: item_name
+        description: "Name of the item viewed on the website."
+        tests:
+          - unique
+          - not_null
+
+      - name: avg_price
+        description: "Average price per unit of the item across all item-view records."
+
+      - name: total_item_views
+        description: "Total number of item-view events recorded for the item."
+        tests:
+          - not_null
+
+      - name: total_add_to_cart
+        description: "Total quantity of the item added to cart across all sessions."
+
+      - name: total_remove_from_cart
+        description: "Total quantity of the item removed from cart across all sessions."
+
+
+  - name: dim_employee
+    description: "One row per employee, containing employee attributes and current employment status."
+
+    columns:
+      - name: employee_id
+        description: "Unique identifier for each employee."
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: "Employee name."
+
+      - name: title
+        description: "Employee job title."
+
+      - name: city
+        description: "City where the employee is located."
+
+      - name: address
+        description: "Employee address."
+
+      - name: annual_salary
+        description: "Employee annual salary."
+
+      - name: hire_date
+        description: "Date when the employee was hired."
+
+      - name: quit_date
+        description: "Date when the employee left the company, if applicable."
+
+      - name: employee_status
+        description: "Current employment status of the employee, such as active or quit."
+
+      - name: is_quit
+        description: "Boolean flag indicating whether the employee has quit the company."
+  
+  - name: dim_client
+    description: "One row per client, summarizing the client's session history and latest device information."
+
+    columns:
+      - name: client_id
+        description: "Unique identifier for each client."
+        tests:
+          - unique
+          - not_null
+
+      - name: latest_device_os
+        description: "Most recent device operating system observed for the client."
+
+      - name: first_session_time
+        description: "Timestamp of the client's first recorded session."
+
+      - name: last_session_time
+        description: "Timestamp of the client's most recent recorded session."
+
+      - name: total_sessions
+        description: "Total number of sessions associated with the client."
+
+      - name: is_returning_client
+        description: "Boolean flag indicating whether the client had more than one session."
