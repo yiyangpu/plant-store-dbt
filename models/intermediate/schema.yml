@@ -84,9 +84,8 @@ models:
       - name: is_quit
         description: "Boolean flag indicating whether the employee has quit"
 
-
   - name: int_orders
-    description: "Order-level intermediate table built by deduplicating orders and combining them with return information."
+    description: "Order-level intermediate table built from orders, item views, and returns. Each row represents one order and includes item amount, shipping, tax, refund status, and net revenue."
 
     columns:
       - name: order_id
@@ -95,11 +94,61 @@ models:
           - not_null
           - unique
 
+      - name: session_id
+        description: "Session identifier associated with the order"
+        tests:
+          - not_null
+
+      - name: client_name
+        description: "Name of the client who placed the order"
+
       - name: order_time
         description: "Timestamp when the order was placed"
 
-      - name: is_refunded
-        description: "Original refund flag from returns table"
+      - name: payment_method
+        description: "Payment method used for the order"
 
-      - name: is_refunded_bool
-        description: "Cleaned boolean flag indicating whether the order was refunded"
+      - name: shipping_address
+        description: "Shipping address for the order"
+
+      - name: state
+        description: "State associated with the shipping address"
+
+      - name: distinct_items_ordered
+        description: "Number of distinct items added to cart in the session associated with the order"
+
+      - name: total_add_to_cart_quantity
+        description: "Total quantity of items added to cart in the session associated with the order"
+
+      - name: total_remove_from_cart_quantity
+        description: "Total quantity of items removed from cart in the session associated with the order"
+
+      - name: gross_added_amount
+        description: "Total dollar amount of items added to cart before removals"
+
+      - name: removed_amount
+        description: "Total dollar amount of items removed from cart"
+
+      - name: net_item_amount
+        description: "Net item amount after subtracting removed item value from added item value"
+
+      - name: shipping_cost
+        description: "Shipping cost charged for the order"
+
+      - name: tax_rate
+        description: "Tax rate applied to the order"
+
+      - name: tax_amount
+        description: "Tax amount calculated from net item amount and tax rate"
+
+      - name: gross_order_amount
+        description: "Total order amount before refunds, including net item amount, shipping cost, and tax"
+
+      - name: is_refunded
+        description: "Boolean flag indicating whether the order was refunded"
+
+      - name: returned_date
+        description: "Date when the order was returned, if applicable"
+
+      - name: net_revenue
+        description: "Final realized revenue for the order; zero if refunded, otherwise equal to gross order amount"
