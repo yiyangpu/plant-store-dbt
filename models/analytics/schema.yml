@@ -142,7 +142,7 @@ models:
         description: "Boolean flag indicating whether the client had more than one session."
 
 
-  - name: fact_order
+  - name: fact_orders
     description: "Fact table at the order level. Each row represents one order, including item amounts, shipping, tax, refund status, and final net revenue."
 
     columns:
