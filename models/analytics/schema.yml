@@ -142,7 +142,7 @@ models:
         description: "Boolean flag indicating whether the client had more than one session."
 
 
-  - name: fact_orders
+  - name: fact_order
     description: "Fact table at the order level. Each row represents one order, including item amounts, shipping, tax, refund status, and final net revenue."
 
     columns:
@@ -187,3 +187,41 @@ models:
 
       - name: net_revenue
         description: "Final realized revenue: zero if refunded, otherwise equal to gross_order_amount"
+
+
+  - name: daily_finances
+    description: "Daily finance summary table combining order revenue, employee salary expense, and recorded operating expenses to track business income at the daily level."
+
+    columns:
+      - name: date
+        description: "Calendar date for the daily financial summary"
+        tests:
+          - not_null
+          - unique
+
+      - name: order_revenue
+        description: "Total net revenue from orders placed on that date"
+
+      - name: employee_salary
+        description: "Total daily salary expense for all employees active on that date, calculated as annual salary divided by 365"
+
+      - name: hr_cost
+        description: "Recorded HR-related operating expenses for that date, excluding employee salary"
+
+      - name: warehouse_cost
+        description: "Recorded warehouse-related operating expenses for that date"
+
+      - name: tech_tool_cost
+        description: "Recorded technology tool expenses for that date"
+
+      - name: other_cost
+        description: "Recorded other operating expenses for that date"
+
+      - name: total_operating_expenses
+        description: "Total recorded non-salary operating expenses for that date, summed across all expense categories"
+
+      - name: total_cost
+        description: "Total daily business cost, calculated as employee salary plus total recorded operating expenses"
+
+      - name: net_income
+        description: "Daily net income, calculated as order revenue minus total cost"
