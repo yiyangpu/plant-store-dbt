@@ -115,6 +115,7 @@ models:
       - name: is_quit
         description: "Boolean flag indicating whether the employee has quit the company."
   
+  
   - name: dim_client
     description: "One row per client, summarizing the client's session history and latest device information."
 
@@ -139,3 +140,40 @@ models:
 
       - name: is_returning_client
         description: "Boolean flag indicating whether the client had more than one session."
+
+  - name: daily_finances
+    description: "Daily finance summary table combining order revenue, employee salary expense, and recorded operating expenses to track business income at the daily level."
+
+    columns:
+      - name: date
+        description: "Calendar date for the daily financial summary"
+        tests:
+          - not_null
+          - unique
+
+      - name: order_revenue
+        description: "Total net revenue from orders placed on that date"
+
+      - name: employee_salary
+        description: "Total daily salary expense for all employees active on that date, calculated as annual salary divided by 365"
+
+      - name: hr_cost
+        description: "Recorded HR-related operating expenses for that date, excluding employee salary"
+
+      - name: warehouse_cost
+        description: "Recorded warehouse-related operating expenses for that date"
+
+      - name: tech_tool_cost
+        description: "Recorded technology tool expenses for that date"
+
+      - name: other_cost
+        description: "Recorded other operating expenses for that date"
+
+      - name: total_other_expenses
+        description: "Total recorded non-salary operating expenses for that date, summed across all expense categories"
+
+      - name: total_cost
+        description: "Total daily business cost, calculated as employee salary plus total recorded operating expenses"
+
+      - name: total_income
+        description: "Daily net income, calculated as order revenue minus total cost"
