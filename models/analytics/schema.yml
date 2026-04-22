@@ -115,6 +115,7 @@ models:
       - name: is_quit
         description: "Boolean flag indicating whether the employee has quit the company."
   
+  
   - name: dim_client
     description: "One row per client, summarizing the client's session history and latest device information."
 

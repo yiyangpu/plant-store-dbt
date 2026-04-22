@@ -4,6 +4,11 @@ sources:
   - name: google_drive
     database: LOAD
     schema: GOOGLE_DRIVE
+    config:
+      freshness:
+        warn_after: {count: 1, period: day}
+        error_after: {count: 2, period: day}
+      loaded_at_field: _FIVETRAN_SYNCED
     tables:
       - name: expenses
       - name: returns
@@ -13,6 +18,11 @@ sources:
   - name: web
     database: LOAD
     schema: WEB_SCHEMA
+    config:
+      freshness:
+        warn_after: {count: 1, period: day}
+        error_after: {count: 2, period: day}
+      loaded_at_field: '"_fivetran_synced"'
     tables:
       - name: sessions
       - name: page_views
