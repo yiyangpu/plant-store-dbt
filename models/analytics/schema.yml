@@ -139,3 +139,50 @@ models:
 
       - name: is_returning_client
         description: "Boolean flag indicating whether the client had more than one session."
+
+
+  - name: fact_orders
+    description: "Fact table at the order level. Each row represents one order, including item amounts, shipping, tax, refund status, and final net revenue."
+
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order"
+        tests:
+          - not_null
+          - unique
+
+      - name: session_id
+        description: "Session associated with the order"
+
+      - name: client_name
+        description: "Name of the client who placed the order"
+
+      - name: order_time
+        description: "Timestamp when the order was placed"
+
+      - name: payment_method
+        description: "Payment method used for the order"
+
+      - name: state
+        description: "State of the shipping address"
+
+      - name: net_item_amount
+        description: "Net item amount after subtracting removed items from added items"
+
+      - name: shipping_cost
+        description: "Shipping cost charged for the order"
+
+      - name: tax_amount
+        description: "Tax amount applied to the order"
+
+      - name: gross_order_amount
+        description: "Total order amount before refunds (item + shipping + tax)"
+
+      - name: is_refunded
+        description: "Boolean flag indicating whether the order was refunded"
+
+      - name: returned_date
+        description: "Date when the order was returned (if applicable)"
+
+      - name: net_revenue
+        description: "Final realized revenue: zero if refunded, otherwise equal to gross_order_amount"
