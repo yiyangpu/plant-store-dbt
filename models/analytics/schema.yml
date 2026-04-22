@@ -141,39 +141,49 @@ models:
       - name: is_returning_client
         description: "Boolean flag indicating whether the client had more than one session."
 
-  - name: daily_finances
-    description: "Daily finance summary table combining order revenue, employee salary expense, and recorded operating expenses to track business income at the daily level."
+
+  - name: fact_orders
+    description: "Fact table at the order level. Each row represents one order, including item amounts, shipping, tax, refund status, and final net revenue."
 
     columns:
-      - name: date
-        description: "Calendar date for the daily financial summary"
+      - name: order_id
+        description: "Unique identifier for each order"
         tests:
           - not_null
           - unique
 
-      - name: order_revenue
-        description: "Total net revenue from orders placed on that date"
+      - name: session_id
+        description: "Session associated with the order"
 
-      - name: employee_salary
-        description: "Total daily salary expense for all employees active on that date, calculated as annual salary divided by 365"
+      - name: client_name
+        description: "Name of the client who placed the order"
 
-      - name: hr_cost
-        description: "Recorded HR-related operating expenses for that date, excluding employee salary"
+      - name: order_time
+        description: "Timestamp when the order was placed"
 
-      - name: warehouse_cost
-        description: "Recorded warehouse-related operating expenses for that date"
+      - name: payment_method
+        description: "Payment method used for the order"
 
-      - name: tech_tool_cost
-        description: "Recorded technology tool expenses for that date"
+      - name: state
+        description: "State of the shipping address"
 
-      - name: other_cost
-        description: "Recorded other operating expenses for that date"
+      - name: net_item_amount
+        description: "Net item amount after subtracting removed items from added items"
 
-      - name: total_other_expenses
-        description: "Total recorded non-salary operating expenses for that date, summed across all expense categories"
+      - name: shipping_cost
+        description: "Shipping cost charged for the order"
 
-      - name: total_cost
-        description: "Total daily business cost, calculated as employee salary plus total recorded operating expenses"
+      - name: tax_amount
+        description: "Tax amount applied to the order"
 
-      - name: total_income
-        description: "Daily net income, calculated as order revenue minus total cost"
+      - name: gross_order_amount
+        description: "Total order amount before refunds (item + shipping + tax)"
+
+      - name: is_refunded
+        description: "Boolean flag indicating whether the order was refunded"
+
+      - name: returned_date
+        description: "Date when the order was returned (if applicable)"
+
+      - name: net_revenue
+        description: "Final realized revenue: zero if refunded, otherwise equal to gross_order_amount"
