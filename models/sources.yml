@@ -22,7 +22,7 @@ sources:
       freshness:
         warn_after: {count: 1, period: day}
         error_after: {count: 2, period: day}
-      loaded_at_field: _fivetran_synced
+      loaded_at_field: '"_fivetran_synced"'
     tables:
       - name: sessions
       - name: page_views
