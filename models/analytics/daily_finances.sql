@@ -72,13 +72,13 @@ final AS (
         COALESCE(e.warehouse_cost, 0) AS warehouse_cost,
         COALESCE(e.tech_tool_cost, 0) AS tech_tool_cost,
         COALESCE(e.other_cost, 0) AS other_cost,
-        COALESCE(e.total_expenses, 0) AS total_other_expenses,
+        COALESCE(e.total_expenses, 0) AS total_operating_expenses,
 
         COALESCE(s.employee_salary, 0) + COALESCE(e.total_expenses, 0) AS total_cost,
 
         COALESCE(r.order_revenue, 0)
         - COALESCE(s.employee_salary, 0)
-        - COALESCE(e.total_expenses, 0) AS total_income
+        - COALESCE(e.total_expenses, 0) AS net_income
 
     FROM date_spine d
     LEFT JOIN daily_revenue r
