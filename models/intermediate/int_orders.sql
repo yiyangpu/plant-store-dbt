@@ -70,7 +70,6 @@ final AS (
         COALESCE(o.tax_rate, 0) AS tax_rate,
         COALESCE(i.net_item_amount, 0) * COALESCE(o.tax_rate, 0) AS tax_amount,
         COALESCE(i.net_item_amount, 0)
-            + COALESCE(o.shipping_cost, 0)
             + (COALESCE(i.net_item_amount, 0) * COALESCE(o.tax_rate, 0)) AS gross_order_amount,
 
         COALESCE(r.is_refunded, FALSE) AS is_refunded,
@@ -80,7 +79,6 @@ final AS (
             WHEN COALESCE(r.is_refunded, FALSE) = TRUE THEN 0
             ELSE
                 COALESCE(i.net_item_amount, 0)
-                + COALESCE(o.shipping_cost, 0)
                 + (COALESCE(i.net_item_amount, 0) * COALESCE(o.tax_rate, 0))
         END AS net_revenue
 
