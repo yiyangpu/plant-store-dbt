@@ -34,6 +34,16 @@ daily_revenue AS (
 
 ),
 
+daily_shipping AS (
+
+    SELECT
+        DATE(order_time) AS date,
+        SUM(shipping_cost) AS shipping_cost
+    FROM {{ ref('int_orders') }}
+    GROUP BY 1
+
+),
+
 daily_salary AS (
 
     SELECT
@@ -74,11 +84,15 @@ final AS (
         COALESCE(e.other_cost, 0) AS other_cost,
         COALESCE(e.total_expenses, 0) AS total_operating_expenses,
 
-        COALESCE(s.employee_salary, 0) + COALESCE(e.total_expenses, 0) AS total_cost,
+        COALESCE(s.employee_salary, 0)
+        + COALESCE(e.total_operating_expenses, 0)
+        + COALESCE(sh.shipping_cost, 0) AS total_cost,
+
 
         COALESCE(r.order_revenue, 0)
         - COALESCE(s.employee_salary, 0)
-        - COALESCE(e.total_expenses, 0) AS net_income
+        - COALESCE(e.total_expenses, 0) 
+        - COALESCE(sh.shipping_cost, 0) AS net_income
 
     FROM date_spine d
     LEFT JOIN daily_revenue r
