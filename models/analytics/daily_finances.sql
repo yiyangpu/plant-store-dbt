@@ -6,7 +6,7 @@ WITH bounds AS (
             (SELECT MIN(expense_date) FROM {{ ref('int_expenses') }}),
             (SELECT MIN(hire_date) FROM {{ ref('int_employee') }})
         ) AS start_date,
-        CURRENT_DATE() AS end_date
+        DATEADD(day, -1, CURRENT_DATE()) AS end_date
 
 ),
 
