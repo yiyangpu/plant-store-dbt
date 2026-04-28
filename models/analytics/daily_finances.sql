@@ -85,7 +85,7 @@ final AS (
         COALESCE(e.total_expenses, 0) AS total_operating_expenses,
 
         COALESCE(s.employee_salary, 0)
-        + COALESCE(e.total_operating_expenses, 0)
+        + COALESCE(e.total_expenses, 0)
         + COALESCE(sh.shipping_cost, 0) AS total_cost,
 
 
@@ -97,6 +97,8 @@ final AS (
     FROM date_spine d
     LEFT JOIN daily_revenue r
         ON d.date = r.date
+    LEFT JOIN daily_shipping sh
+        ON d.date = sh.date
     LEFT JOIN daily_salary s
         ON d.date = s.date
     LEFT JOIN daily_expenses e
