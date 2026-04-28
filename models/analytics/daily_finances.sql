@@ -77,6 +77,7 @@ final AS (
 
         COALESCE(r.order_revenue, 0) AS order_revenue,
         COALESCE(s.employee_salary, 0) AS employee_salary,
+        COALESCE(sh.shipping_cost, 0) AS shipping_cost,
 
         COALESCE(e.hr_cost, 0) AS hr_cost,
         COALESCE(e.warehouse_cost, 0) AS warehouse_cost,
